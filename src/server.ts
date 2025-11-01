@@ -1,19 +1,19 @@
 import fastify from "fastify";
+import { env } from "./env/index.js";
+import { logger } from "./logger.js";
 
-const app = fastify({
-  logger: true,
-});
+const app = fastify();
 
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
 app
-  .listen({ port: 3000 })
+  .listen({ port: env.HTTP_PORT })
   .then(() => {
-    app.log.info("Server is running on port 3000");
+    logger.info(`Server is running on localhost:${env.HTTP_PORT}`);
   })
   .catch((err) => {
-    app.log.error(err);
+    logger.error(err);
     process.exit(1);
   });
