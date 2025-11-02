@@ -1,11 +1,15 @@
 import fastify from "fastify";
-import { env } from "./env/index.js";
+import cookie from "@fastify/cookie";
 import { logger } from "./logger.js";
+
+import { env } from "./env/index.js";
+import { transactionRoutes } from "./routes/transactions.js";
 
 const app = fastify();
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.register(cookie);
+app.register(transactionRoutes, {
+  prefix: "transactions",
 });
 
 app
