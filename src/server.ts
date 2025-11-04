@@ -1,16 +1,6 @@
-import fastify from "fastify";
-import cookie from "@fastify/cookie";
+import { app } from "./app.js";
 import { logger } from "./logger.js";
-
 import { env } from "./env/index.js";
-import { transactionRoutes } from "./routes/transactions.js";
-
-const app = fastify();
-
-app.register(cookie);
-app.register(transactionRoutes, {
-  prefix: "transactions",
-});
 
 app
   .listen({ port: env.HTTP_PORT })
